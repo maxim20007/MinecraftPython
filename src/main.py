@@ -2,7 +2,7 @@
 
 import random
 
-from ursina import AmbientLight, DirectionalLight, Sky, Ursina, Vec3, window
+from ursina import AmbientLight, DirectionalLight, Ursina, Vec3, window
 
 from player.controller import create_player
 from settings import (
@@ -35,8 +35,8 @@ def main() -> None:
 
     window.color = SKY_COLOR
     window.exit_button.visible = False
+    window.fps_counter.enabled = True
 
-    Sky(color=SKY_COLOR)
     setup_lighting()
 
     seed = random.randint(0, 10_000_000)

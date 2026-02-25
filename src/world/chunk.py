@@ -3,7 +3,6 @@
 from dataclasses import dataclass
 
 from ursina import Entity
-from ursina.shaders import unlit_shader
 
 from settings import CHUNK_SIZE
 from world.blocks import BLOCK_COLORS, BlockType
@@ -40,8 +39,6 @@ class Chunk(Entity):
                     Entity(
                         parent=self,
                         model="cube",
-                        texture="white_cube",
-                        shader=unlit_shader,
                         color=BLOCK_COLORS[block_type],
                         position=(world_x, y, world_z),
                         collider="box",
