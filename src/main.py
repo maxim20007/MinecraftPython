@@ -2,10 +2,17 @@
 
 import random
 
-from ursina import Ursina, window
+from ursina import AmbientLight, DirectionalLight, Sky, Ursina, Vec3, window
 
 from player.controller import create_player
-from settings import CHUNK_GRID_RADIUS, PLAYER_START_POSITION, SKY_COLOR
+from settings import (
+    AMBIENT_LIGHT_COLOR,
+    CHUNK_GRID_RADIUS,
+    PLAYER_START_POSITION,
+    SKY_COLOR,
+    SUNLIGHT_COLOR,
+    SUNLIGHT_DIRECTION,
+)
 from world.chunk import Chunk, ChunkCoord
 
 
@@ -17,11 +24,20 @@ def build_world(seed: int) -> list[Chunk]:
     return chunks
 
 
+def setup_lighting() -> None:
+    AmbientLight(color=AMBIENT_LIGHT_COLOR)
+    sun = DirectionalLight(color=SUNLIGHT_COLOR)
+    sun.look_at(Vec3(*SUNLIGHT_DIRECTION))
+
+
 def main() -> None:
     app = Ursina(title="Minecraft Python MVP")
 
     window.color = SKY_COLOR
     window.exit_button.visible = False
+
+    Sky(color=SKY_COLOR)
+    setup_lighting()
 
     seed = random.randint(0, 10_000_000)
     _chunks = build_world(seed)
