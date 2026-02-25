@@ -1,4 +1,4 @@
-"""Block definitions, colors and textures."""
+"""Block definitions, default colors and optional textures."""
 
 from enum import StrEnum
 
@@ -13,19 +13,20 @@ class BlockType(StrEnum):
     BEDROCK = "bedrock"
 
 
+# Разные цвета по умолчанию (даже без текстур).
 BLOCK_COLORS = {
     BlockType.GRASS: color.rgb(80, 180, 80),
     BlockType.STONE: color.rgb(130, 130, 130),
     BlockType.BEDROCK: color.rgb(20, 20, 20),
 }
 
-# Пока одна текстура для всех блоков. Можно заменить файлами в assets/textures/blocks.
-texture_path = str(DEFAULT_BLOCK_TEXTURE) if DEFAULT_BLOCK_TEXTURE.exists() else 'white_cube'
+# Текстуры опциональны: если файл отсутствует, рендерим чистыми цветами.
+DEFAULT_TEXTURE_PATH = str(DEFAULT_BLOCK_TEXTURE) if DEFAULT_BLOCK_TEXTURE.exists() else None
 
-BLOCK_TEXTURES = {
-    BlockType.GRASS: texture_path,
-    BlockType.STONE: texture_path,
-    BlockType.BEDROCK: texture_path,
+BLOCK_TEXTURES: dict[BlockType, str | None] = {
+    BlockType.GRASS: DEFAULT_TEXTURE_PATH,
+    BlockType.STONE: DEFAULT_TEXTURE_PATH,
+    BlockType.BEDROCK: DEFAULT_TEXTURE_PATH,
 }
 
 HOTBAR_ORDER = [BlockType.GRASS, BlockType.STONE, BlockType.BEDROCK]

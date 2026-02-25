@@ -98,13 +98,17 @@ class Chunk(Entity):
                 continue
 
             mesh = Mesh(vertices=vertices, triangles=triangles, uvs=uvs, mode="triangle")
-            mesh_entity = Entity(
-                parent=self,
-                model=mesh,
-                texture=BLOCK_TEXTURES[block_type],
-                color=BLOCK_COLORS[block_type],
-                collider="mesh",
-            )
+            kwargs = {
+                "parent": self,
+                "model": mesh,
+                "color": BLOCK_COLORS[block_type],
+                "collider": "mesh",
+            }
+            texture = BLOCK_TEXTURES[block_type]
+            if texture:
+                kwargs["texture"] = texture
+
+            mesh_entity = Entity(**kwargs)
             self._mesh_entities.append(mesh_entity)
 
 

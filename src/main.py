@@ -158,7 +158,8 @@ def main() -> None:
     window.exit_button.visible = False
     window.fps_counter.enabled = True
 
-    Sky()
+    # Цветной sky-box без зависимости от внешних текстур, чтобы избежать белого экрана.
+    Sky(color=SKY_COLOR)
     setup_lighting()
 
     seed = random.randint(0, 10_000_000)
