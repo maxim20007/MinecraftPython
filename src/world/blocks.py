@@ -2,7 +2,7 @@
 
 from enum import StrEnum
 
-from settings import rgb255
+from ursina import color
 
 
 class BlockType(StrEnum):
@@ -12,7 +12,7 @@ class BlockType(StrEnum):
 
 
 BLOCK_COLORS = {
-    BlockType.GRASS: rgb255(80, 180, 80),
-    BlockType.STONE: rgb255(130, 130, 130),
-    BlockType.BEDROCK: rgb255(20, 20, 20),
+    BlockType.GRASS: color.lime,
+    BlockType.STONE: color.gray,
+    BlockType.BEDROCK: color.black,
 }

@@ -3,17 +3,20 @@
 import random
 
 from ursina import AmbientLight, DirectionalLight, Ursina, Vec3, window
+from ursina.prefabs.sky import Sky
 
 from player.controller import create_player
 from settings import (
     AMBIENT_LIGHT_COLOR,
     CHUNK_GRID_RADIUS,
-    PLAYER_START_POSITION,
+    CHUNK_SIZE,
+    PLAYER_SPAWN_HEIGHT_OFFSET,
     SKY_COLOR,
     SUNLIGHT_COLOR,
     SUNLIGHT_DIRECTION,
 )
 from world.chunk import Chunk, ChunkCoord
+from world.generator import surface_height
 
 
 def build_world(seed: int) -> list[Chunk]:
@@ -30,6 +33,13 @@ def setup_lighting() -> None:
     sun.look_at(Vec3(*SUNLIGHT_DIRECTION))
 
 
+def choose_spawn(seed: int) -> tuple[float, float, float]:
+    center_x = CHUNK_SIZE // 2
+    center_z = CHUNK_SIZE // 2
+    y = surface_height(center_x, center_z, seed) + PLAYER_SPAWN_HEIGHT_OFFSET
+    return (center_x, y, center_z)
+
+
 def main() -> None:
     app = Ursina(title="Minecraft Python MVP")
 
@@ -37,11 +47,12 @@ def main() -> None:
     window.exit_button.visible = False
     window.fps_counter.enabled = True
 
+    Sky()
     setup_lighting()
 
     seed = random.randint(0, 10_000_000)
     _chunks = build_world(seed)
-    _player = create_player(PLAYER_START_POSITION)
+    _player = create_player(choose_spawn(seed))
 
     app.run()
 
