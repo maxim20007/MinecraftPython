@@ -147,18 +147,68 @@ minecraft-python/
 
 ---
 
-## 9) Пример быстрого старта (когда начнём код)
+## 9) Пример быстрого старта
 
+### macOS / Linux (bash, zsh)
 ```bash
 python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\\Scripts\\activate
-pip install ursina noise
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 python src/main.py
 ```
 
+### Windows PowerShell
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python src/main.py
+```
+
+### Windows CMD
+```bat
+python -m venv .venv
+.venv\Scripts\activate.bat
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python src/main.py
+```
+
+> Важно: в PowerShell не используется команда `source` (это команда для Unix-shell).
+> Если `pip` не найден, используйте `python -m pip` — это надёжнее и кроссплатформенно.
+
 ---
 
-## 10) Риски и решения
+## 10) Частые проблемы при запуске (Windows)
+
+1. **`source` не распознано**
+   - Причина: команда `source` работает в bash/zsh, но не в PowerShell.
+   - Решение (PowerShell):
+     ```powershell
+     .\.venv\Scripts\Activate.ps1
+     ```
+
+2. **`pip` не распознано**
+   - Причина: `pip.exe` может не быть в PATH текущей сессии.
+   - Решение:
+     ```powershell
+     python -m pip install -r requirements.txt
+     ```
+
+3. **`ModuleNotFoundError: No module named 'ursina'`**
+   - Причина: зависимости не установлены в активированное окружение.
+   - Решение:
+     ```powershell
+     .\.venv\Scripts\Activate.ps1
+     python -m pip install -r requirements.txt
+     python src/main.py
+     ```
+
+---
+
+## 11) Риски и решения
 
 1. **Много кубов = просадка FPS**
    - Решение: чанки + объединение мешей + culling.
@@ -169,7 +219,7 @@ python src/main.py
 
 ---
 
-## 11) Что делаем следующим шагом
+## 12) Что делаем следующим шагом
 
 В следующем коммите можно создать:
 - `requirements.txt`
