@@ -1,6 +1,12 @@
 """Game settings for the first MVP iteration."""
 
-from ursina import color
+from ursina import Vec4
+
+
+def rgb255(r: int, g: int, b: int) -> Vec4:
+    """Convert 0-255 RGB values to normalized Ursina color (0-1)."""
+    return Vec4(r / 255, g / 255, b / 255, 1)
+
 
 # World
 CHUNK_SIZE = 16
@@ -23,7 +29,7 @@ PLAYER_INITIAL_YAW = 45
 PLAYER_INITIAL_PITCH = -15
 
 # Visuals
-SKY_COLOR = color.rgb(135, 206, 235)
-AMBIENT_LIGHT_COLOR = color.rgba(255, 255, 255, 0.55)
-SUNLIGHT_COLOR = color.rgb(255, 244, 214)
+SKY_COLOR = rgb255(135, 206, 235)
+AMBIENT_LIGHT_COLOR = Vec4(0.55, 0.55, 0.55, 1)
+SUNLIGHT_COLOR = rgb255(255, 244, 214)
 SUNLIGHT_DIRECTION = (1, -1, -0.6)
