@@ -1,24 +1,40 @@
-"""Game settings for the first MVP iteration."""
+"""Centralized game settings."""
+
+from pathlib import Path
 
 from ursina import color
 
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+TEXTURES_DIR = PROJECT_ROOT / "assets" / "textures"
+DEFAULT_BLOCK_TEXTURE = TEXTURES_DIR / "blocks" / "default_block.png"
+
 # World
 CHUNK_SIZE = 16
-WORLD_HEIGHT = 32
-BASE_HEIGHT = 8
-HEIGHT_VARIATION = 2
-CHUNK_GRID_RADIUS = 0
+WORLD_HEIGHT = 48
+BASE_HEIGHT = 12
+TERRAIN_HEIGHT = 14
+NOISE_SCALE = 52.0
+NOISE_OCTAVES = 4
+NOISE_PERSISTENCE = 0.5
+NOISE_LACUNARITY = 2.0
+RENDER_DISTANCE_CHUNKS = 2
+CHUNK_UPDATE_INTERVAL = 0.25
 
 # Player
-PLAYER_SPAWN_HEIGHT_OFFSET = 3
-PLAYER_SPEED = 5
+PLAYER_SPAWN_HEIGHT_OFFSET = 4
+PLAYER_SPEED = 6
 PLAYER_JUMP_HEIGHT = 1.2
 PLAYER_GRAVITY = 1
 PLAYER_INITIAL_YAW = 225
 PLAYER_INITIAL_PITCH = -25
+
+# Gameplay
+REACH_DISTANCE = 6
 
 # Visuals
 SKY_COLOR = color.azure
 AMBIENT_LIGHT_COLOR = color.rgba(0.55, 0.55, 0.55, 1)
 SUNLIGHT_COLOR = color.white
 SUNLIGHT_DIRECTION = (1, -1, -0.6)
+BLOCK_OUTLINE_COLOR = color.rgba(255, 255, 255, 100)
+CURSOR_COLOR = color.white
