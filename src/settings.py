@@ -1,0 +1,24 @@
+"""Game settings for the first MVP iteration."""
+
+from ursina import color
+
+# World
+CHUNK_SIZE = 16
+WORLD_HEIGHT = 32
+BASE_HEIGHT = 8
+HEIGHT_VARIATION = 2
+CHUNK_GRID_RADIUS = 0
+
+# Player
+PLAYER_SPAWN_HEIGHT_OFFSET = 3
+PLAYER_SPEED = 5
+PLAYER_JUMP_HEIGHT = 1.2
+PLAYER_GRAVITY = 1
+PLAYER_INITIAL_YAW = 225
+PLAYER_INITIAL_PITCH = -25
+
+# Visuals
+SKY_COLOR = color.azure
+AMBIENT_LIGHT_COLOR = color.rgba(0.55, 0.55, 0.55, 1)
+SUNLIGHT_COLOR = color.white
+SUNLIGHT_DIRECTION = (1, -1, -0.6)
